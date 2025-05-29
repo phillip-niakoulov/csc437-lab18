@@ -1,24 +1,24 @@
-export interface IImageData {
+export interface IApiImageData {
     id: string;
     src: string;
     name: string;
-    author: IUserData;
+    author: IApiUserData;
 }
 
-export interface IUserData {
-    id: string,
-    username: string
+export interface IApiUserData {
+    id: string;
+    username: string;
 }
 
-const IMAGES: IImageData[] = [
+const IMAGES: IApiImageData[] = [
     {
         id: "0",
         src: "https://upload.wikimedia.org/wikipedia/commons/3/33/Blue_merle_koolie_short_coat_heading_sheep.jpg",
         name: "Blue merle herding sheep",
         author: {
             id: "0",
-            username: "chunkylover23"
-        }
+            username: "chunkylover23",
+        },
     },
     {
         id: "1",
@@ -26,8 +26,8 @@ const IMAGES: IImageData[] = [
         name: "Huskies",
         author: {
             id: "0",
-            username: "chunkylover23"
-        }
+            username: "chunkylover23",
+        },
     },
     {
         id: "2",
@@ -35,8 +35,8 @@ const IMAGES: IImageData[] = [
         name: "Shiba",
         author: {
             id: "0",
-            username: "chunkylover23"
-        }
+            username: "chunkylover23",
+        },
     },
     {
         id: "3",
@@ -44,7 +44,7 @@ const IMAGES: IImageData[] = [
         name: "Tabby cat",
         author: {
             id: "1",
-            username: "silas_meow"
+            username: "silas_meow",
         },
     },
     {
@@ -53,9 +53,9 @@ const IMAGES: IImageData[] = [
         name: "Chickens",
         author: {
             id: "2",
-            username: "fulffycoat"
-        }
-    }
+            username: "fulffycoat",
+        },
+    },
 ];
 
 let fetchCount = 0;

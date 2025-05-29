@@ -1,0 +1,49 @@
+### Get all images
+# This is a comment
+GET http://localhost:3000/api/images
+
+### A second example.  Each request must be delimited by a triple hash
+POST http://localhost:3000/api/test
+Content-Type: application/json # Content-Type header is a must if you're sending JSON
+# Request body separated from headers by newline
+
+{ "a": 1, "b": 2 }
+
+### Substring image search
+GET http://localhost:3000/api/images/search?substring=sheep
+
+# doesnt change anything btw since Tabby Cat is the original name (feel free to change)
+### Update image (works) 
+PUT http://localhost:3000/api/images/
+Content-Type: application/json
+
+{
+    "name": "Tabby Cat",
+    "imageId": "6837e61feef1511e5d29dd99"
+}
+
+### Update Image: Bad Request (missing parameters)
+PUT http://localhost:3000/api/images/
+Content-Type: application/json
+
+{
+    "name": "New Image Name"
+}
+
+### Update Image: Not Found (invalid ObjectId)
+PUT http://localhost:3000/api/images/
+Content-Type: application/json
+
+{
+    "imageId": "invalidObjectId",
+    "name": "New Image Name"
+}
+
+### Update Image: Unprocessable Entity (excessively long image name)
+PUT http://localhost:3000/api/images/
+Content-Type: application/json
+
+{
+    "imageId": "6837e61feef1511e5d29dd99", 
+    "name": "This is an example of an extremely long name that exceeds the 100 character limit that is imposed onto this get request to intentinally test the validation."
+}
