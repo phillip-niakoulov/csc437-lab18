@@ -38,7 +38,14 @@ export class ImageProvider {
     }
 
     getAllImages() {
-        return this.collection.find().toArray(); // Without any options, will by default get all documents in the collection as an array.
+        return this.collection.find().toArray();
+    }
+
+    async getImageAuthorId(imageId: string) {
+        const image = await this.collection.findOne({
+            _id: new ObjectId(imageId),
+        });
+        return image ? image.authorId : null;
     }
 
     async getImages(substring?: string): Promise<IApiImageData[]> {
@@ -77,5 +84,19 @@ export class ImageProvider {
         );
 
         return result.matchedCount;
+    }
+
+    async createImage(
+        src: string,
+        name: string,
+        authorId: string
+    ): Promise<void> {
+        const newImage: IImageDocument = {
+            src,
+            name,
+            authorId,
+        };
+
+        await this.collection.insertOne(newImage);
     }
 }

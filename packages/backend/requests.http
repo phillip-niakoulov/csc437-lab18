@@ -47,3 +47,83 @@ Content-Type: application/json
     "imageId": "6837e61feef1511e5d29dd99", 
     "name": "This is an example of an extremely long name that exceeds the 100 character limit that is imposed onto this get request to intentinally test the validation."
 }
+
+
+
+
+### Register User (works)
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{ "username": "newuser", "password": "password" }
+
+### Register User: Bad Request (missing parameters)
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{ "username": "newuser" }
+
+### Register User: Bad Request (username already taken)
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{ "username": "newuser", "password": "password" }
+
+
+
+
+
+### Login User (works)
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{ "username": "newuser", "password": "password" }
+
+### Login User: Bad Request (missing password)
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{ "username": "unknownuser" }
+
+### Login User: Bad Request (wrong password)
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{ "username": "newuser", "password": "wrongpassword" }
+
+### Login User: Bad Request (wrong user)
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{ "username": "unknownuser", "password": "password" }
+
+
+
+
+### Images WITH JWT
+GET http://localhost:3000/api/images
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5ld3VzZXIiLCJpYXQiOjE3NDkwMjUyMDEsImV4cCI6MTc0OTExMTYwMX0.UL5ZNA4f_CZS07Oe7eutr1KTLe6SMCfEMFc-CQFXJVU
+
+
+
+### Register User to one that already exists to check name editing
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{ "username": "chunkylover23", "password": "password" }
+
+### Login User (chunkylover23)
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{ "username": "chunkylover23", "password": "password" }
+
+### Update image (chunkylover23) 
+PUT http://localhost:3000/api/images/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNodW5reWxvdmVyMjMiLCJpYXQiOjE3NDkwMjU3MjAsImV4cCI6MTc0OTExMjEyMH0.8wHXfhzTTh0q84m5ZRouyEtRNYzbGTZXKzLAO1jvoSU
+Content-Type: application/json
+
+{
+    "name": "Blue merle herding sheep!",
+    "imageId": "6837e61feef1511e5d29dd96"
+}

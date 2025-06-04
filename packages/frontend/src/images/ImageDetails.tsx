@@ -7,6 +7,7 @@ interface AllImagesProps {
     error: boolean;
     imageData: IApiImageData[];
     setImageData: React.Dispatch<React.SetStateAction<IApiImageData[]>>;
+    authToken: string;
 }
 
 export function ImageDetails({
@@ -14,6 +15,7 @@ export function ImageDetails({
     error,
     imageData,
     setImageData,
+    authToken,
 }: AllImagesProps) {
     const { imageId } = useParams();
 
@@ -46,6 +48,7 @@ export function ImageDetails({
                 initialValue={image.name}
                 imageId={image.id}
                 onNameChange={handleNameChange}
+                authToken={authToken}
             />
             <img
                 className="ImageDetails-img"
